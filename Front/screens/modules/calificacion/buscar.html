@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="../../../css/style.css" rel="stylesheet">
+  <link href="clasificacion.css" rel="stylesheet">
+  <script src="../../../js/interfaz.js" defer></script>
+</head>     
+<body>
+    <div class="card">
+    <h1 class="titulo"><strong>Búsqueda</strong></h1>
+
+    <div class="form-group">
+        <label>Buscar por</label>
+        <select id="tipo-busqueda">
+            <option value="nombre">Nombre</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>Nombre del candidato</label>
+        <input type="text" id="valor-busqueda" placeholder="Ingrese nombre">
+    </div>
+
+    <button class="btn-save" onclick="buscarCandidato()">Buscar</button>
+    <br>
+    <div id="principalcontent"></div>
+    
+    <div id="modal-detalle" class="modal hidden">
+    <div class="modal-content">
+
+        <span class="close" onclick="cerrarModal()">&times;</span>
+
+        <h2>Detalle del candidato</h2>
+
+        <div id="modal-body"></div>
+
+    </div>
+</div>
+</div>
+</body>
+

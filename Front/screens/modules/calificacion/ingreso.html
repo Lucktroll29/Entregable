@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="../../../css/style.css" rel="stylesheet">
+  <script src="../../../js/interfaz.js" defer></script>
+  
+</head>     
+<body>
+    <div class="card">
+        <h1 class="titulo"><strong>Ingreso de Calificación</strong></h1>
+        <br>
+        <br>
+        <form id="form-calificacion">
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Nombre del candidato <strong class="required">*</strong></label>
+                    <input type="text" id="nombre_candidato" name="nombre_candidato" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Cargo <strong class="required">*</strong></label>
+                    <input type="text" id="cargo_candidato" name="cargo_candidato" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Nombre del calificador <strong class="required">*</strong></label>
+                <input type="text" id="nombre_calificador" name="nombre_calificador" required>
+            </div>
+
+            <div class="form-group">
+                <label>Cargo del calificador <strong class="required">*</strong></label>
+                <input type="text" id="cargo_calificador" name="cargo_calificador" required>
+            </div>
+
+            <div class="form-group">
+                <label>Número Requisición (Opcional)</label>
+                <input type="text" id="numero_requisicion" name="numero_requisicion">
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Prueba Técnica (1-5) <strong class="required">*</strong></label>
+                    <input type="number" id="puntaje_tecnico" name="puntaje_tecnico" min="1" max="5" step="0.1" required>
+                </div>
+                <div class="form-group">
+                    <label>Entrevista Área Encargada (1-5) <strong class="required">*</strong></label>
+                    <input type="number" id="puntaje_entrevista" name="puntaje_entrevista" min="1" step="0.1" max="5" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Candidato Apto <strong class="required">*</strong></label>
+                <select id="apto" name="apto" required>
+                    <option value="">Seleccione una opción...</option>
+                    <option value="true">Sí</option>
+                    <option value="false">No</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Observaciones (Opcional)</label>
+                <textarea id="observacion" name="observacion" rows="4" placeholder="Comentarios adicionales..."></textarea>
+            </div>
+
+            <button type="submit" class="btn-save">Guardar Calificación</button>
+        </form>
+    </div>
+    <!-- <script src="../../../js/controller/calificacion-controller.js"></script> -->
+</body>
+

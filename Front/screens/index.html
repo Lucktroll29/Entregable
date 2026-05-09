@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seleccion RH</title>
+  <link href="../css/style.css" rel="stylesheet">
+  <script src="../js/interfaz.js" defer></script>
+  <script src="../js/controller/calificacion-controller.js" defer></script>
+</head>     
+<body>
+
+  <div class="app-container">
+
+    <!-- SIDEBAR -->
+
+    <div class="sidebar">
+
+      <div><img src="../css/img/logo.png" style="width: 100%;" alt="Logo"> </div>
+
+      <div class="sidebar-header">
+        <h2>Menú</h2>  
+      </div>
+      
+      <div style="background-color: white; height: 2px;"></div>
+
+      <div class="menu-item active" onclick="showModule('Inicio', this)">
+        Incio
+      </div>
+
+      <div class="menu-item" onclick="showModule('calificacion', this)">
+        Formato calificación candidato
+      </div>
+
+      <div class="menu-item" onclick="showModule('seguimiento', this)">
+        Seguimiento a candidatos
+      </div>
+
+      <div class="menu-item" onclick="showModule('referencias', this)">
+        Verificación de referencias
+      </div>
+
+      <!-- <div class="menu-item" onclick="showModule('consolidado', this)">
+        Consolidado de candidatos
+      </div> -->
+
+      <div class="menu-item logout-btn" onclick="logout()">
+        Cerrar sesión
+      </div>
+
+    </div>
+
+
+    <div class="right-panel">
+
+      <!-- HEADER -->
+
+      <header class="top-header">
+
+        <div class="header-left">
+          <h2 id="module-title">Formato calificación candidato</h2>
+        </div>
+
+        <div class="header-right">
+          <span id="fecha-actual"></span>
+        </div>
+
+      </header>
+
+      <!-- CONTENIDO -->
+
+      <div class="main-content">
+
+        <!--Modulo Inicio-->
+
+        <div id="Inicio" class="module active">
+
+          <div class="welcome-section">
+            <h1>Bienvenido</h1>
+            <p>Seleccione un módulo para continuar</p>
+          </div>
+
+          <div class="modulos-grid">
+
+            <div class="modulo-card"
+                onclick="showModule('calificacion', document.querySelectorAll('.menu-item')[1])">
+              <div class="icono">📝</div>
+              <h2>Formato calificación candidato</h2>
+              <p>Registrar y consultar evaluaciones de candidatos.</p>
+            </div>
+
+            <div class="modulo-card"
+                onclick="showModule('seguimiento', document.querySelectorAll('.menu-item')[2])">
+              <div class="icono">📋</div>
+              <h2>Seguimiento a candidatos</h2>
+              <p>Visualizar el estado y avance de los procesos.</p>
+            </div>
+
+            <div class="modulo-card"
+                onclick="showModule('referencias', document.querySelectorAll('.menu-item')[3])">
+              <div class="icono">☎️</div>
+              <h2>Verificación de referencias</h2>
+              <p>Consultar y validar referencias laborales.</p>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- MODULO 1 -->
+
+        <div id="calificacion" class="module">
+          <div class="acciones-calificacion">
+            <button onclick="cargarVista('ingreso')">Ingreso</button>
+            <button onclick="cargarVista('buscar')">Buscar</button>
+          </di>
+
+          <div id="contenido-calificacion"></div>
+        </div>
+
+        <!-- MODULO 2 -->
+
+        <div id="seguimiento" class="module">
+          <h1>Seguimiento a candidatos</h1>
+
+          <div class="card">
+            <p>
+              Aquí se visualizará el seguimiento del proceso.
+            </p>
+          </div>
+        </div>
+
+        <!-- MODULO 3 -->
+
+        <div id="referencias" class="module">
+          <h1>Verificación de referencias</h1>
+
+          <div class="card">
+            <p>
+              Aquí irá el formulario de validación de referencias.
+            </p>
+          </div>
+        </div>
+
+        <!-- MODULO 4 -->
+
+        <div id="consolidado" class="module">
+          <h1>Consolidado de candidatos</h1>
+
+          <div class="card">
+            <p>
+              Aquí aparecerá el consolidado general.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

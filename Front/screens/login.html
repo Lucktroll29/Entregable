@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Login - Selección RH</title>
+
+  <link rel="stylesheet" href="../css/login.css">
+  
+</head>
+
+<body>
+
+  <div class="login-container">
+
+    <!-- PANEL IZQUIERDO -->
+
+    <div class="login-left">
+
+      <div class="overlay"></div>
+
+      <div class="left-content">
+
+        <img src="../css/img/logo_nofondo.png" alt="Logo Empresa" class="logo">
+
+      </div>
+
+    </div>
+
+    <!-- PANEL DERECHO -->
+
+    <div class="login-right">
+
+      <div class="login-card">
+
+        <h2>Sistema Selección RH</h2>
+
+        <p class="subtitle">
+          Plataforma de gestión y seguimiento de procesos
+          de selección de talento humano.
+        </p> 
+
+
+
+        <h2>Iniciar Sesión</h2>
+
+        <p class="subtitle">
+          Ingresa tus credenciales
+        </p>
+
+        
+
+        <form id="login-form">
+
+          <div class="form-group">
+
+            <input
+              type="text"
+              id="usuario"
+              name="usuario"
+              placeholder="Ingresa tu usuario"
+              required
+            >
+          </div>
+
+          <div class="form-group">
+
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Ingresa tu contraseña"
+              required
+            >
+          </div>
+
+          <button type="submit" class="btn-login">
+            Ingresar
+          </button>
+
+        </form>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <script src="../js/controller/login-controller.js"></script>
+</body>
+
+</html>
