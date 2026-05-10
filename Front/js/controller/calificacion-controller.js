@@ -112,6 +112,7 @@ function mostrarTablaCalificaciones(dataArray) {
                     <th>Puntaje Técnico</th>
                     <th>Puntaje Entrevista</th>
                     <th>Apto</th>
+                    <th>Requisición</th>
                     <th>Observaciones</th>
                 </tr>
             </thead>
@@ -128,7 +129,8 @@ function mostrarTablaCalificaciones(dataArray) {
                 <td>${item.puntaje_tecnico}</td>
                 <td>${item.puntaje_entrevista}</td>
                 <td>${item.apto ? 'Sí' : 'No'}</td>
-                <td>${item.observacion}</td>
+                <td>${item.numero_requisicion || 'N/A'}</td>
+                <td>${item.observacion || 'Sin observaciones'}</td>
             </tr>
         `;
     });

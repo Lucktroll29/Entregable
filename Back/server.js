@@ -23,7 +23,27 @@ app.get('/test', (req, res) => {
     res.send('El servidor está funcionando correctamente');
 });
 
+// Ruta para autenticación de usuarios
+app.post('/login', async (req, res) => {
+    const { usuario, password } = req.body;
+    console.log("Intento de login para:", usuario); // Esto te ayudará a ver si llega la petición
 
+    try {
+        const query = 'SELECT * FROM usuarios WHERE usuario = $1 AND password = $2 AND activo = true';
+        const result = await pool.query(query, [usuario, password]);
+
+        if (result.rows.length > 0) {
+            res.json({ success: true, user: result.rows[0] });
+        } else {
+            res.status(401).json({ success: false, message: 'Usuario o clave incorrectos' });
+        }
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ success: false, error: 'Error interno' });
+    }
+});
+
+// Ruta para guardar calificaciones
 app.post('/guardar-calificacion', async (req, res) => {
   // Extraemos todos los campos que vienen del formulario
   const { 
@@ -53,25 +73,7 @@ app.post('/guardar-calificacion', async (req, res) => {
   }
 });
 
-app.post('/login', async (req, res) => {
-    const { usuario, password } = req.body;
-    console.log("Intento de login para:", usuario); // Esto te ayudará a ver si llega la petición
-
-    try {
-        const query = 'SELECT * FROM usuarios WHERE usuario = $1 AND password = $2 AND activo = true';
-        const result = await pool.query(query, [usuario, password]);
-
-        if (result.rows.length > 0) {
-            res.json({ success: true, user: result.rows[0] });
-        } else {
-            res.status(401).json({ success: false, message: 'Usuario o clave incorrectos' });
-        }
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({ success: false, error: 'Error interno' });
-    }
-});
-
+// Ruta para buscar candidatos por nombre o número de requisición
 app.post('/buscar-candidato', async (req, res) => {
 
   const { tipo, valor } = req.body;
@@ -127,6 +129,113 @@ app.post('/buscar-candidato', async (req, res) => {
 
 });
 
+// Ruta para guardar seguimiento
+app.post('/guardar-seguimiento', async (req, res) => {
+
+  // Extraer datos enviados desde el frontend
+  const {
+    nombre_candidato,
+    cargo_candidato,
+    telefono_candidato,
+    correo_candidato,
+    fecha_postulacion,
+    numero_requisicion,
+    estado,
+    observacion
+  } = req.body;
+
+  try {
+
+    const query = `
+      INSERT INTO "dataSeguimiento"
+      (
+        nombre_candidato,
+        cargo_candidato,
+        telefono_candidato,
+        correo_candidato,
+        fecha_postulacion,
+        numero_requisicion,
+        estado,
+        observacion
+      )
+      VALUES
+      ($1, $2, $3, $4, $5, $6, $7, $8)
+      RETURNING *
+    `;
+
+    const values = [
+      nombre_candidato,
+      cargo_candidato,
+      telefono_candidato,
+      correo_candidato,
+      fecha_postulacion,
+      numero_requisicion || null,
+      estado,
+      observacion || null
+    ];
+
+    const result = await pool.query(query, values);
+
+    res.status(200).json({
+      success: true,
+      data: result.rows[0]
+    });
+
+  } catch (err) {
+
+    console.error("Error guardando seguimiento:", err);
+
+    res.status(500).json({
+      success: false,
+      error: err.message
+    });
+
+  }
+
+});
+
+// Ruta para buscar seguimientos
+app.post('/buscar-seguimiento', async (req, res) => {
+
+  const { nombre, cargo } = req.body;
+
+  try {
+
+    let query = `SELECT * FROM "dataSeguimiento" WHERE 1=1`;
+    const params = [];
+
+    if (nombre && nombre.trim() !== '') {
+      query += ` AND nombre_candidato ILIKE $${params.length + 1}`;
+      params.push(`%${nombre}%`);
+    }
+
+    if (cargo && cargo.trim() !== '') {
+      query += ` AND cargo_candidato ILIKE $${params.length + 1}`;
+      params.push(`%${cargo}%`);
+    }
+
+    const result = await pool.query(query, params);
+
+    res.json({
+      success: true,
+      data: result.rows
+    });
+
+  } catch (err) {
+
+    console.error("Error en búsqueda de seguimiento:", err);
+
+    res.status(500).json({
+      success: false,
+      error: err.message
+    });
+
+  }
+
+});
+
+
+// Iniciar el servidor
 const PORT = 3000;
 app.listen(PORT, () => {
   console.log(`Servidor de RH corriendo en http://localhost:${PORT}`);

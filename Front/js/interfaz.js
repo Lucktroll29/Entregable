@@ -38,7 +38,7 @@ function logout() {
 
 
 // CARGAR VISTAS DINÁMICAS de Calificacion
-async function cargarVista(vista) {
+async function cargarVistaClasificacion(vista) {
 
   const contenedor = document.getElementById('contenido-calificacion');
 
@@ -59,8 +59,44 @@ async function cargarVista(vista) {
     const html = await response.text();
 
     contenedor.innerHTML = html;
-    iniciarFormularioCalificacion();
-    iniciarBusqueda();
+    if (vista === 'ingreso') {
+      iniciarFormularioCalificacion();
+    } else if (vista === 'buscar') {
+      buscarCandidato();
+    }
+
+  } catch (error) {
+
+    console.error('Error cargando vista:', error);
+
+  }
+}
+
+// CARGAR VISTAS DINÁMICAS de Seguimiento
+async function cargarVistaSeguimiento(vista) {
+
+  const contenedor = document.getElementById('contenido-seguimiento');
+
+  let ruta = '';
+
+  if (vista === 'ingreso') {
+    ruta = './modules/seguimiento/ingreso.html';
+  }
+
+  if (vista === 'buscar') {
+    ruta = './modules/seguimiento/buscar.html';
+  }
+
+  try {
+
+    const response = await fetch(ruta);
+
+    const html = await response.text();
+
+    contenedor.innerHTML = html;
+    if (vista === 'ingreso') {
+      iniciarFormularioSeguimiento();
+    }
 
   } catch (error) {
 
@@ -72,5 +108,6 @@ async function cargarVista(vista) {
 
 // CARGA INICIAL
 window.addEventListener('DOMContentLoaded', () => {
-  cargarVista('ingreso');
+  cargarVistaClasificacion('ingreso');
+  cargarVistaSeguimiento('ingreso');
 });

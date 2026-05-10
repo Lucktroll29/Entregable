@@ -7,6 +7,7 @@
   <link href="../css/style.css" rel="stylesheet">
   <script src="../js/interfaz.js" defer></script>
   <script src="../js/controller/calificacion-controller.js" defer></script>
+  <script src="../js/controller/seguimiento-controller.js" defer></script>
 </head>     
 <body>
 
@@ -110,24 +111,23 @@
         <!-- MODULO 1 -->
 
         <div id="calificacion" class="module">
-          <div class="acciones-calificacion">
-            <button onclick="cargarVista('ingreso')">Ingreso</button>
-            <button onclick="cargarVista('buscar')">Buscar</button>
-          </di>
+          <div class="acciones-modulos">
+            <button onclick="cargarVistaClasificacion('ingreso')">Ingreso</button>
+            <button onclick="cargarVistaClasificacion('buscar')">Buscar</button>
+          </div>
 
           <div id="contenido-calificacion"></div>
         </div>
 
-        <!-- MODULO 2 -->
+          <!-- MODULO 2 -->
 
         <div id="seguimiento" class="module">
-          <h1>Seguimiento a candidatos</h1>
-
-          <div class="card">
-            <p>
-              Aquí se visualizará el seguimiento del proceso.
-            </p>
+          <div class="acciones-modulos">
+            <button onclick="cargarVistaSeguimiento('ingreso')">Ingreso</button>
+            <button onclick="cargarVistaSeguimiento('buscar')">Buscar</button>
           </div>
+
+          <div id="contenido-seguimiento"></div>
         </div>
 
         <!-- MODULO 3 -->

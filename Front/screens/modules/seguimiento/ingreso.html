@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="../../../css/style.css" rel="stylesheet">
+  <script src="../../../js/interfaz.js" defer></script>
+  
+</head>     
+<body>
+    <div class="card">
+        <h1 class="titulo"><strong>Ingreso de Seguimiento de Candidatos</strong></h1>
+        <br>
+        <br>
+        <form id="form-seguimiento">
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Nombre del candidato <strong class="required">*</strong></label>
+                    <input type="text" id="nombre_candidato" name="nombre_candidato" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Cargo <strong class="required">*</strong></label>
+                    <input type="text" id="cargo_candidato" name="cargo_candidato" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Télefono <strong class="required">*</strong></label>
+                    <input type="text" id="telefono_candidato" name="telefono_candidato" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Correo Electronico <strong class="required">*</strong></label>
+                    <input type="email" id="correo_candidato" name="correo_candidato" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Fecha de Postulación <strong class="required">*</strong></label>
+                    <input type="date" id="fecha_postulacion" name="fecha_postulacion" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Número Requisición (Opcional)</label>
+                    <input type="text" id="numero_requisicion" name="numero_requisicion">
+                </div>
+
+                <div class="form-group">
+                    <label>Estado <strong class="required">*</strong></label>
+                    <select id="estado" name="estado" required>
+                        <option value="">Seleccione una opción...</option>
+                        <option value="1">Postulado</option>
+                        <option value="2">Pendiente de Postular</option>
+                        <option value="3">Entrevistas y Pruebas</option>
+                        <option value="4">No seleccionado</option>
+                        <option value="5">Entrevista con el Líder</option>
+                        <option value="6">Seleccionado</option>
+                        <option value="7">Contratado</option>
+                        <option value="8">Contactado</option>
+                        <option value="9">Prueba Técnica</option>
+                        <option value="10">Team Assessment</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Observaciones (Opcional)</label>
+                <textarea id="observacion" name="observacion" rows="4" placeholder="Comentarios adicionales..."></textarea>
+            </div>
+
+            <button type="submit" class="btn-save">Guardar</button>
+        </form>
+    </div>
+</body>
+
