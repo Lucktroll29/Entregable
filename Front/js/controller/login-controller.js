@@ -1,3 +1,16 @@
+// FUNCIÓN PARA MOSTRAR ALERTAS PERSONALIZADOS EN LOGIN
+function mostrarAlerta(mensaje, tipo = 'info') {
+    const alertaDiv = document.createElement('div');
+    alertaDiv.className = `custom-alert alert-${tipo}`;
+    alertaDiv.textContent = mensaje;
+    document.body.appendChild(alertaDiv);
+
+    setTimeout(() => {
+        alertaDiv.classList.add('hidden');
+        setTimeout(() => alertaDiv.remove(), 300);
+    }, 3000);
+}
+
 document.getElementById('login-form').addEventListener('submit', async function(e) {
     e.preventDefault();
 
@@ -16,13 +29,13 @@ document.getElementById('login-form').addEventListener('submit', async function(
         if (result.success) {
             // Guardamos el nombre del usuario en el navegador para usarlo luego
             localStorage.setItem('usuarioLogueado', true);
-            alert(`¡Bienvenido!`);
-            window.location.href = 'index.html'; 
+            mostrarAlerta("¡Bienvenido!", 'success');
+            setTimeout(() => window.location.href = 'index.html', 1500); 
         } else {
-            alert("Error: Ha ocurrido un error inesperado" + result.error);
+            mostrarAlerta("Error: Credenciales inválidas, intenta nuevamente.", 'error');
         }
     } catch (error) {
         console.error("Error:", error);
-        alert("No se pudo conectar con el servidor de autenticación.");
+        mostrarAlerta("No se pudo conectar con el servidor de autenticación.", 'error');
     }
 });

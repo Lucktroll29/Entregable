@@ -234,6 +234,57 @@ app.post('/buscar-seguimiento', async (req, res) => {
 
 });
 
+// Ruta para actualizar seguimiento
+app.put('/actualizar-seguimiento', async (req, res) => {
+
+    try {
+
+        const {
+            id_registro,
+            nombre_candidato,
+            telefono_candidato,
+            correo_candidato,
+            estado,
+            observacion
+        } = req.body;
+
+        const query = `
+            UPDATE "dataSeguimiento"
+            SET
+                nombre_candidato = $1,
+                telefono_candidato = $2,
+                correo_candidato = $3,
+                estado = $4,
+                observacion = $5
+            WHERE id_registro = $6
+            RETURNING *
+        `;
+
+        const result = await pool.query(query, [
+            nombre_candidato,
+            telefono_candidato,
+            correo_candidato,
+            estado,
+            observacion,
+            id_registro
+        ]);
+
+        res.json({
+            success: true,
+            data: result.rows[0]
+        });
+
+    } catch (error) {
+
+        console.error("Error actualizando seguimiento:", error);
+
+        res.status(500).json({
+            success: false,
+            error: error.message
+        });
+    }
+});
+
 
 // Iniciar el servidor
 const PORT = 3000;

@@ -1,3 +1,16 @@
+// FUNCIÓN PARA MOSTRAR ALERTAS PERSONALIZADOS
+function mostrarAlerta(mensaje, tipo = 'info') {
+  const alertaDiv = document.createElement('div');
+  alertaDiv.className = `custom-alert alert-${tipo}`;
+  alertaDiv.textContent = mensaje;
+  document.body.appendChild(alertaDiv);
+
+  setTimeout(() => {
+    alertaDiv.classList.add('hidden');
+    setTimeout(() => alertaDiv.remove(), 300);
+  }, 3000);
+}
+
 function showModule(moduleId, element) {
 
   // ocultar módulos
@@ -24,16 +37,16 @@ function showModule(moduleId, element) {
 
 // VALIDAR LOGIN
 if (localStorage.getItem('usuarioLogueado') !== 'true') {
-  alert("No has iniciado sesión. Redirigiendo al login...");
-  window.location.href = 'login.html';
+  mostrarAlerta("No has iniciado sesión. Redirigiendo al login...", 'warning');
+  setTimeout(() => window.location.href = 'login.html', 1500);
 }
 
 
 // CERRAR SESIÓN
 function logout() {
-  alert("Sesion cerrada. Redirigiendo al login...");
+  mostrarAlerta("Sesión cerrada. Redirigiendo al login...", 'info');
   localStorage.clear();
-  window.location.href = 'login.html';
+  setTimeout(() => window.location.href = 'login.html', 1500);
 }
 
 

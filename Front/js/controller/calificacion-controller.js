@@ -44,7 +44,7 @@ async function guardarCalificacion(e) {
 
         if (result.success) {
 
-            alert("¡Éxito! El candidato fue guardado en la base de datos.");
+            mostrarAlerta("¡Éxito! El candidato fue guardado en la base de datos.", 'success');
 
             formulario.reset();
 
@@ -52,14 +52,14 @@ async function guardarCalificacion(e) {
 
             console.error("Error del servidor:", result.error);
 
-            alert("Error al guardar: " + result.error);
+            mostrarAlerta("Error al guardar: " + result.error, 'error');
         }
 
     } catch (error) {
 
         console.error("Error de conexión:", error);
 
-        alert("No se pudo conectar con el servidor.");
+        mostrarAlerta("No se pudo conectar con el servidor.", 'error');
 
     }
 
@@ -82,7 +82,7 @@ async function buscarCandidato() {
         const result = await response.json();
 
         if (!result.success || !result.data) {
-            alert("No se encontró el candidato");
+            mostrarAlerta("No se encontró el candidato", 'warning');
             return;
         }
 
@@ -90,7 +90,7 @@ async function buscarCandidato() {
 
     } catch (error) {
         console.error(error);
-        alert("Error en la búsqueda");
+        mostrarAlerta("Error en la búsqueda", 'error');
     }
 }
 

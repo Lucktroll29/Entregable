@@ -8,6 +8,7 @@ function iniciarFormularioSeguimiento() {
     formulario.addEventListener('submit', guardarSeguimiento);
 }
 
+let seguimientosGlobal = [];
 
 // Guardar seguimiento
 async function guardarSeguimiento(e) {
@@ -42,7 +43,7 @@ async function guardarSeguimiento(e) {
 
         if (result.success) {
 
-            alert("¡Seguimiento guardado correctamente!");
+            mostrarAlerta("¡Seguimiento guardado correctamente!", 'success');
 
             formulario.reset();
 
@@ -50,7 +51,7 @@ async function guardarSeguimiento(e) {
 
             console.error("Error del servidor:", result.error);
 
-            alert("Error al guardar: " + result.error);
+            mostrarAlerta("Error al guardar: " + result.error, 'error');
 
         }
 
@@ -58,7 +59,7 @@ async function guardarSeguimiento(e) {
 
         console.error("Error de conexión:", error);
 
-        alert("No se pudo conectar con el servidor.");
+        mostrarAlerta("No se pudo conectar con el servidor.", 'error');
 
     }
 
@@ -71,7 +72,7 @@ async function buscarSeguimiento() {
     const cargo = document.getElementById('valor-busqueda-cargo').value;
 
     if (!nombre && !cargo) {
-        alert("Por favor ingrese al menos un valor de búsqueda");
+        mostrarAlerta("Por favor ingrese al menos un valor de búsqueda", 'warning');
         return;
     }
 
@@ -86,7 +87,7 @@ async function buscarSeguimiento() {
         const result = await response.json();
 
         if (!result.success || !result.data || result.data.length === 0) {
-            alert("No se encontraron resultados");
+            mostrarAlerta("No se encontraron resultados");
             return;
         }
 
@@ -94,12 +95,14 @@ async function buscarSeguimiento() {
 
     } catch (error) {
         console.error(error);
-        alert("Error en la búsqueda");
+        mostrarAlerta("Error en la búsqueda");
     }
 }
 
 // Función para mostrar tabla de seguimientos
 function mostrarTablaSeguimiento(dataArray) {
+
+    seguimientosGlobal = dataArray;
 
     const contenedor = document.getElementById('principalcontent');
 
@@ -149,7 +152,7 @@ function mostrarTablaSeguimiento(dataArray) {
             <td>${row.fecha_postulacion.split('T')[0]}</td>
             <td>${estados[row.estado]}</td>
             <td>${row.observacion || 'Sin observaciones'}</td>
-            <td><button class="btn-ver" onclick="verDetalles(${row.id})">Editar</button></td>
+            <td><button class="btn-ver" onclick="verDetalles(${row.id_registro})">Editar</button></td>
         </tr>`;
     });
 
@@ -157,4 +160,165 @@ function mostrarTablaSeguimiento(dataArray) {
     html += '</div>';
 
     contenedor.innerHTML = html;
+}
+
+function verDetalles(id_registro) {
+
+    const seguimiento = seguimientosGlobal.find(item => item.id_registro == id_registro);
+
+    if (!seguimiento) {
+        mostrarAlerta("Registro no encontrado");
+        return;
+    }
+
+    const estados = {
+        1: "Postulado",
+        2: "Pendiente de Postular",
+        3: "Entrevistas y Pruebas",
+        4: "No seleccionado",
+        5: "Entrevista con el Líder",
+        6: "Seleccionado",
+        7: "Contratado",
+        8: "Contactado",
+        9: "Prueba Técnica",
+        10: "Team Assessment"
+    };
+
+    let opcionesEstados = '';
+
+    for (const key in estados) {
+
+        opcionesEstados += `
+            <option value="${key}" ${seguimiento.estado == key ? 'selected' : ''}>
+                ${estados[key]}
+            </option>
+        `;
+    }
+
+    const html = `
+    
+        <div class="card">
+            <h2 class="titulo">Editar Seguimiento</h2>
+
+            <form id="form-editar-seguimiento">
+
+                <input type="hidden" id="edit-id" value="${seguimiento.id_registro}">
+
+                <div class="form-row">
+
+                    <div class="form-group">
+                        <label>Requisición</label>
+                        <input type="text" value="${seguimiento.numero_requisicion || ''}" readonly>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Cargo</label>
+                        <input type="text" value="${seguimiento.cargo_candidato || ''}" readonly>
+                    </div>
+
+                </div>
+
+                <div class="form-row">
+
+                    <div class="form-group">
+                        <label>Nombre</label>
+                        <input type="text" id="edit-nombre" value="${seguimiento.nombre_candidato || ''}">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Teléfono</label>
+                        <input type="text" id="edit-telefono" value="${seguimiento.telefono_candidato || ''}">
+                    </div>
+
+                </div>
+
+                <div class="form-row">
+
+                    <div class="form-group">
+                        <label>Correo</label>
+                        <input type="email" id="edit-correo" value="${seguimiento.correo_candidato || ''}">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Estado</label>
+                        <select id="edit-estado">
+                            ${opcionesEstados}
+                        </select>
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    <label>Observaciones</label>
+                    <textarea id="edit-observacion">${seguimiento.observacion || ''}</textarea>
+                </div>
+
+                <br>
+
+                <button type="button" class="btn-save" onclick="actualizarSeguimiento()">
+                    Actualizar
+                </button>
+
+            </form>
+        </div>
+    `;
+
+    document.getElementById('contenedor-edicion').innerHTML = html;
+
+    window.scrollTo({
+        top: document.body.scrollHeight,
+        behavior: 'smooth'
+    });
+}
+
+async function actualizarSeguimiento() {
+    debugger;
+    const datos = {
+
+        id_registro: document.getElementById('edit-id').value,
+
+        nombre_candidato: document.getElementById('edit-nombre').value,
+
+        telefono_candidato: document.getElementById('edit-telefono').value,
+
+        correo_candidato: document.getElementById('edit-correo').value,
+
+        estado: document.getElementById('edit-estado').value,
+
+        observacion: document.getElementById('edit-observacion').value
+    };
+
+    try {
+
+        const response = await fetch('http://localhost:3000/actualizar-seguimiento', {
+
+            method: 'PUT',
+
+            headers: {
+                'Content-Type': 'application/json'
+            },
+
+            body: JSON.stringify(datos)
+
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+
+            mostrarAlerta("Seguimiento actualizado correctamente", 'success');
+
+            buscarSeguimiento();
+
+        } else {
+
+            mostrarAlerta(result.error || "Error actualizando", 'error');
+        }
+
+    } catch (error) {
+
+        console.error(error);
+
+        mostrarAlerta("Error de conexión", 'error');
+    }
 }

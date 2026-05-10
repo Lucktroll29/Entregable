@@ -371,6 +371,63 @@ textarea {
   cursor: pointer;
 }
 
+/*Alertas*/
+
+.custom-alert {
+
+    position: fixed;
+
+    top: 20px;
+    right: 20px;
+
+    min-width: 300px;
+    max-width: 400px;
+
+    padding: 16px 20px;
+
+    border-radius: 12px;
+
+    color: white;
+
+    font-size: 15px;
+    font-weight: 500;
+
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+
+    z-index: 9999;
+
+    opacity: 1;
+
+    transform: translateY(0);
+
+    transition: all 0.3s ease;
+}
+
+.hidden {
+
+    opacity: 0;
+
+    transform: translateY(-20px);
+
+    pointer-events: none;
+}
+
+.alert-success {
+    background: #2e7d32;
+}
+
+.alert-error {
+    background: #c62828;
+}
+
+.alert-warning {
+    background: #ef6c00;
+}
+
+.alert-info {
+    background: #1565c0;
+}
+
 /* =========================
    ACCIONES CALIFICACION
 ========================= */
