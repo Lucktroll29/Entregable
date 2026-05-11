@@ -8,6 +8,7 @@
   <script src="../js/interfaz.js" defer></script>
   <script src="../js/controller/calificacion-controller.js" defer></script>
   <script src="../js/controller/seguimiento-controller.js" defer></script>
+  <script src="../js/controller/referencias-controller.js" defer></script>
 </head>     
 <body>
 
@@ -26,7 +27,7 @@
       <div style="background-color: white; height: 2px;"></div>
 
       <div class="menu-item active" onclick="showModule('Inicio', this)">
-        Incio
+        Inicio
       </div>
 
       <div class="menu-item" onclick="showModule('calificacion', this)">
@@ -40,10 +41,6 @@
       <div class="menu-item" onclick="showModule('referencias', this)">
         Verificación de referencias
       </div>
-
-      <!-- <div class="menu-item" onclick="showModule('consolidado', this)">
-        Consolidado de candidatos
-      </div> -->
 
       <div class="menu-item logout-btn" onclick="logout()">
         Cerrar sesión
@@ -59,7 +56,7 @@
       <header class="top-header">
 
         <div class="header-left">
-          <h2 id="module-title">Formato calificación candidato</h2>
+          <h2 id="module-title">Inicio</h2>
         </div>
 
         <div class="header-right">
@@ -82,7 +79,6 @@
           </div>
 
           <div class="modulos-grid">
-
             <div class="modulo-card"
                 onclick="showModule('calificacion', document.querySelectorAll('.menu-item')[1])">
               <div class="icono">📝</div>
@@ -103,12 +99,10 @@
               <h2>Verificación de referencias</h2>
               <p>Consultar y validar referencias laborales.</p>
             </div>
-
           </div>
-
         </div>
 
-        <!-- MODULO 1 -->
+        <!-- MODULO Calificación -->
 
         <div id="calificacion" class="module">
           <div class="acciones-modulos">
@@ -119,7 +113,7 @@
           <div id="contenido-calificacion"></div>
         </div>
 
-          <!-- MODULO 2 -->
+          <!-- MODULO Seguimiento -->
 
         <div id="seguimiento" class="module">
           <div class="acciones-modulos">
@@ -130,28 +124,15 @@
           <div id="contenido-seguimiento"></div>
         </div>
 
-        <!-- MODULO 3 -->
+        <!-- MODULO Referencias -->
 
         <div id="referencias" class="module">
-          <h1>Verificación de referencias</h1>
-
-          <div class="card">
-            <p>
-              Aquí irá el formulario de validación de referencias.
-            </p>
+          <div class="acciones-modulos">
+            <button onclick="cargarVistaReferencias('ingreso')">Ingreso</button>
+            <button onclick="cargarVistaReferencias('buscar')">Buscar</button>
           </div>
-        </div>
 
-        <!-- MODULO 4 -->
-
-        <div id="consolidado" class="module">
-          <h1>Consolidado de candidatos</h1>
-
-          <div class="card">
-            <p>
-              Aquí aparecerá el consolidado general.
-            </p>
-          </div>
+          <div id="contenido-referencias"></div>
         </div>
       </div>
     </div>

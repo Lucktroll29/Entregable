@@ -72,10 +72,9 @@ async function cargarVistaClasificacion(vista) {
     const html = await response.text();
 
     contenedor.innerHTML = html;
+
     if (vista === 'ingreso') {
       iniciarFormularioCalificacion();
-    } else if (vista === 'buscar') {
-      buscarCandidato();
     }
 
   } catch (error) {
@@ -118,9 +117,43 @@ async function cargarVistaSeguimiento(vista) {
   }
 }
 
+// CARGAR VISTAS DINÁMICAS de Referencias
+async function cargarVistaReferencias(vista) {
+
+  const contenedor = document.getElementById('contenido-referencias');
+
+  let ruta = '';
+
+  if (vista === 'ingreso') {
+    ruta = './modules/referencias/ingreso.html';
+  }
+
+  if (vista === 'buscar') {
+    ruta = './modules/referencias/buscar.html';
+  }
+
+  try {
+
+    const response = await fetch(ruta);
+
+    const html = await response.text();
+
+    contenedor.innerHTML = html;
+    if (vista === 'ingreso') {
+      iniciarFormularioReferencias();
+    }
+
+  } catch (error) {
+
+    console.error('Error cargando vista:', error);
+
+  }
+}
+
 
 // CARGA INICIAL
 window.addEventListener('DOMContentLoaded', () => {
   cargarVistaClasificacion('ingreso');
   cargarVistaSeguimiento('ingreso');
+  cargarVistaReferencias('ingreso');
 });

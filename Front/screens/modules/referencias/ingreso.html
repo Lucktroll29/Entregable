@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="../../../css/style.css" rel="stylesheet">
+  <script src="../../../js/interfaz.js" defer></script>
+  
+</head>     
+<body>
+    <div class="card">
+        <h1 class="titulo"><strong>Ingreso de Referencias</strong></h1>
+        <br>
+        <br>
+        <form id="form-referencias">
+            <p><strong>1- Datos del candidato</strong></p>
+            <br>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Nombre del candidato <strong class="required">*</strong></label>
+                    <input type="text" id="nombre_candidato" name="nombre_candidato" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Cargo <strong class="required">*</strong></label>
+                    <input type="text" id="cargo_candidato" name="cargo_candidato" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Area <strong class="required">*</strong></label>
+                    <input type="text" id="area_cargo" name="area_cargo" required>
+                </div>
+            </div>
+
+            <p><strong>2- Informacion de Referencia</strong></p>
+            <br>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Nombre de la Empresa <strong class="required">*</strong></label>
+                    <input type="text" id="nombre_empresa" name="nombre_empresa" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Cargo que desempeño <strong class="required">*</strong></label>
+                    <input type="text" id="cargo_desempenado" name="cargo_desempenado" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Recontrato ¿Si ó No? <strong class="required">*</strong></label>
+                    <select id="recontrato" name="recontrato" required>
+                        <option value="">Seleccione una opción...</option>
+                        <option value="true">Sí</option>
+                        <option value="false">No</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>¿Porque? <strong class="required">*</strong></label>
+                    <input type="text" id="motivo_recontrato" name="motivo_recontrato" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Nombre Referente <strong class="required">*</strong></label>
+                    <input type="text" id="nombre_referente" name="nombre_referente" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Relación con el Candidato <strong class="required">*</strong></label>
+                    <input type="text" id="relacion_candidato" name="relacion_candidato" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Telefono Referente <strong class="required">*</strong></label>
+                    <input type="text" id="telefono_referente" name="telefono_referente" required>
+                </div>
+            </div>
+
+            <p><strong>3- Informacción laboral</strong></p>
+            <br>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Tipo contrato <strong class="required">*</strong></label>
+                    <input type="text" id="tipo_contrato" name="tipo_contrato" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Cargo <strong class="required">*</strong></label>
+                    <input type="text" id="cargo_ocupado" name="cargo_ocupado" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Fecha de Ingreso <strong class="required">*</strong></label>
+                    <input type="date" id="fecha_ingreso" name="fecha_ingreso" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Fecha de Salida <strong class="required">*</strong></label>
+                    <input type="date" id="fecha_salida" name="fecha_salida" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Motivo Retiro <strong class="required">*</strong></label>
+                    <input type="text" id="motivo_retiro" name="motivo_retiro" required>
+                </div>
+            </div>
+
+            <p><strong>4- Informacción adicional</strong></p>
+            <br>
+
+            <div class="form-group">
+                <label>¿Cómo describiría el desempeño general del candidato/a en el cargo que ocupó? <strong class="required">*</strong></label>
+                <input type="text" id="desempeno" name="desempeno" required>
+            </div>
+
+            <div class="form-group">
+                <label>¿Cuáles eran sus responsabilidades principales? <strong class="required">*</strong></label>
+                <input type="text" id="responsabilidades" name="responsabilidades" required>
+            </div>
+
+            <div class="form-group">
+                <label>¿Hubo algún logro o resultado destacado que recuerde de su gestión? <strong class="required">*</strong></label>
+                <input type="text" id="logros" name="logros" required>
+            </div>
+
+            <div class="form-group">
+                <label>¿Cuáles considera que son las principales fortalezas profesionales del candidato? <strong class="required">*</strong></label>
+                <input type="text" id="fortalezas" name="fortalezas" required>
+            </div>
+
+            <div class="form-group">
+                <label>¿Cuáles considera que son las principales oportunidades de mejora profesionales del candidato? <strong class="required">*</strong></label>
+                <input type="text" id="oportunidades" name="oportunidades" required>
+            </div>
+
+            <div class="form-group">
+                <label>¿Cómo era su relación con el equipo de trabajo y líderes? <strong class="required">*</strong></label>
+                <input type="text" id="relacion_equipo" name="relacion_equipo" required>
+            </div>
+
+            <div class="form-group">
+                <label>¿Es una persona confiable? <strong class="required">*</strong></label>
+                <input type="text" id="confiable" name="confiable" required>
+            </div>
+
+            <div class="form-group">
+                <label>¿La desvinculación del candidato se dio en buenos términos? <strong class="required">*</strong></label>
+                <input type="text" id="desvinculacion" name="desvinculacion" required>
+            </div>
+
+            <div class="form-group">
+                <label>Observaciones (Opcional)</label>
+                <textarea id="observacion" name="observacion" rows="4" placeholder="Comentarios adicionales..."></textarea>
+            </div>
+
+            <button type="submit" class="btn-save">Guardar Calificación</button>
+        </form>
+    </div>
+</body>
